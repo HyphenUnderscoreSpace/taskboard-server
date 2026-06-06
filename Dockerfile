@@ -7,6 +7,8 @@ RUN localedef -f UTF-8 -i ja_JP ja_JP
 ENV LANG=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
 WORKDIR /app
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
 COPY . /app
 RUN yarn install
 RUN npx prisma generate
