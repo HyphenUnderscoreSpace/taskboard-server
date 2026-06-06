@@ -11,4 +11,4 @@ COPY . /app
 RUN yarn install
 RUN npx prisma generate
 
-CMD ["sh", "-seq", "npx prisma migrate deploy && node index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node index.js"]
