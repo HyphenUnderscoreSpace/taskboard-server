@@ -1,0 +1,43 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title タスク管理ボード
+    link(rel="stylesheet", href="/style.css")
+  body
+    header.nav-bar
+      .user-info
+        if user
+          span.user-icon
+          span.user-name #{user} さんがログイン中
+        else
+          span.user-name
+      // router.js で設定した /logout パスへリンクを飛ばします
+      a.logout-btn(href="/logout") ログアウト
+
+  h1.board-title 組織タスクボード
+
+    .board
+      section#todo.column
+        h3 未完了
+        .add-task-container
+          input#new-task-input(type="text", placeholder="新しいタスクを入力……")
+          button#add-task-button 追加
+        ul#todo-list.task-list
+          each post in boardData.todo
+            li.task(draggable="true", data-id=post.id)= post.content
+
+      section#doing.column
+        h3 進行中
+        ul#doing-list.task-list
+          each post in boardData.doing
+            li.task(draggable="true", data-id=post.id)= post.content
+
+      section#done.column
+        h3 完了
+        ul#done-list.task-list
+          each post in boardData.done
+            li.task(draggable="true", data-id=post.id)= post.content
+
+    script(src="/taskboard.js")
